@@ -1,8 +1,9 @@
 import type { Tool } from "openai/resources/responses/responses";
 import { searchGif } from "./giphyClient.js";
 import { getInspirationalQuote } from "./quoteClient.js";
+import * as mcp from "./mcpClient.js";
 
-export const toolDefinitions: Tool[] = [
+const localTools: Tool[] = [
   {
     type: "function",
     name: "get_current_time",
@@ -50,6 +51,11 @@ export const toolDefinitions: Tool[] = [
   },
 ];
 
+export async function getAllTools(): Promise<Tool[]> {
+  const mcpTools = await mcp.listTools();
+  return [...localTools, ...mcpTools];
+}
+
 export type ToolCall = {
   callId: string;
   name: string;
@@ -58,6 +64,10 @@ export type ToolCall = {
 
 export async function executeTool(toolCall: ToolCall): Promise<string> {
   try {
+    if (mcp.isMcpTool(toolCall.name)) {
+      return await mcp.callTool(toolCall.name, toolCall.arguments);
+    }
+
     switch (toolCall.name) {
       case "get_current_time":
         return executeGetCurrentTime(toolCall.arguments);

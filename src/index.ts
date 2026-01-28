@@ -1,9 +1,13 @@
 import "dotenv/config";
 import { getUserInput, print, close } from "./cli.js";
 import * as llm from "./llm.js";
+import * as mcp from "./mcpClient.js";
 import { executeTool } from "./tools.js";
 
 async function main() {
+  await mcp.connect();
+  await llm.init();
+
   console.log("Chat CLI (type 'exit' to quit)\n");
 
   while (true) {
