@@ -15,7 +15,7 @@ async function main() {
     let response = await llm.complete();
 
     while (response.wantsTool) {
-      const result = executeTool(response.toolCall!);
+      const result = await executeTool(response.toolCall!);
       llm.addToolResult(response.toolCall!.callId, result);
       response = await llm.complete();
     }
