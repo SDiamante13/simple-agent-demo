@@ -9,7 +9,7 @@ conversation.addSystemPrompt(readFileSync("prompt.md", "utf-8"));
 
 export type Response = {
   wantsTool: boolean;
-  toolCall?: ToolCall;
+  toolCalls: ToolCall[];
   text: string;
 };
 
@@ -30,19 +30,18 @@ export async function complete(): Promise<Response> {
 
   conversation.addResponse(response.output);
 
-  const toolCall = response.output.find((o) => o.type === "function_call");
+  const functionCalls = response.output.filter(
+    (o) => o.type === "function_call"
+  );
 
-  if (toolCall?.type === "function_call") {
-    return {
-      wantsTool: true,
-      toolCall: {
-        callId: toolCall.call_id,
-        name: toolCall.name,
-        arguments: JSON.parse(toolCall.arguments),
-      },
-      text: "",
-    };
+  if (functionCalls.length > 0) {
+    const toolCalls = functionCalls.map((fc) => ({
+      callId: fc.call_id,
+      name: fc.name,
+      arguments: JSON.parse(fc.arguments),
+    }));
+    return { wantsTool: true, toolCalls, text: "" };
   }
 
-  return { wantsTool: false, text: response.output_text };
+  return { wantsTool: false, toolCalls: [], text: response.output_text };
 }

@@ -15,8 +15,12 @@ async function main() {
     let response = await llm.complete();
 
     while (response.wantsTool) {
-      const result = await executeTool(response.toolCall!);
-      llm.addToolResult(response.toolCall!.callId, result);
+      const results = await Promise.all(
+        response.toolCalls.map((tc) => executeTool(tc))
+      );
+      for (let i = 0; i < response.toolCalls.length; i++) {
+        llm.addToolResult(response.toolCalls[i].callId, results[i]);
+      }
       response = await llm.complete();
     }
 
