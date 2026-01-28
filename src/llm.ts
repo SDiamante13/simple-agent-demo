@@ -1,8 +1,11 @@
+import { readFileSync } from "fs";
 import OpenAI from "openai";
 import { toolDefinitions, ToolCall } from "./tools.js";
 import * as conversation from "./conversation.js";
 
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
+conversation.addSystemPrompt(readFileSync("prompt.md", "utf-8"));
 
 export type Response = {
   wantsTool: boolean;
