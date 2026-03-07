@@ -57,15 +57,20 @@ export type ToolCall = {
 };
 
 export async function executeTool(toolCall: ToolCall): Promise<string> {
-  switch (toolCall.name) {
-    case "get_current_time":
-      return executeGetCurrentTime(toolCall.arguments);
-    case "get_gif":
-      return executeGetGif(toolCall.arguments);
-    case "get_inspirational_quote":
-      return getInspirationalQuote();
-    default:
-      return `Unknown tool: ${toolCall.name}`;
+  try {
+    switch (toolCall.name) {
+      case "get_current_time":
+        return executeGetCurrentTime(toolCall.arguments);
+      case "get_gif":
+        return await executeGetGif(toolCall.arguments);
+      case "get_inspirational_quote":
+        return await getInspirationalQuote();
+      default:
+        return `Unknown tool: ${toolCall.name}`;
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    return `Tool '${toolCall.name}' failed: ${message}`;
   }
 }
 
