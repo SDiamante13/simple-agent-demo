@@ -34,12 +34,18 @@ export function addToolResult(callId: string, output: string) {
   conversation.addToolResult(callId, output);
 }
 
-export async function complete(): Promise<Response> {
-  const response = await client.responses.create({
+export async function complete(onToken?: (token: string) => void): Promise<Response> {
+  const stream = client.responses.stream({
     model: "gpt-4o-mini",
     input: conversation.getItems() as OpenAI.Responses.ResponseInputItem[],
     tools,
   });
+
+  if (onToken) {
+    stream.on("response.output_text.delta", (event) => onToken(event.delta));
+  }
+
+  const response = await stream.finalResponse();
 
   conversation.addResponse(response.output);
 

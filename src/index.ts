@@ -1,5 +1,5 @@
 import "dotenv/config";
-import { getUserInput, print, close } from "./cli.js";
+import { getUserInput, printToken, printEnd, close } from "./cli.js";
 import * as llm from "./llm.js";
 import * as mcp from "./mcpClient.js";
 import { executeTool } from "./tools.js";
@@ -16,7 +16,7 @@ async function main() {
     if (!userInput.trim()) continue;
 
     llm.addUserMessage(userInput);
-    let response = await llm.complete();
+    let response = await llm.complete(printToken);
 
     while (response.wantsTool) {
       const results = await Promise.all(
@@ -25,10 +25,10 @@ async function main() {
       for (let i = 0; i < response.toolCalls.length; i++) {
         llm.addToolResult(response.toolCalls[i].callId, results[i]);
       }
-      response = await llm.complete();
+      response = await llm.complete(printToken);
     }
 
-    print(response.text);
+    printEnd();
   }
 
   close();

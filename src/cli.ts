@@ -10,4 +10,11 @@ export const getUserInput = (): Promise<string> =>
 
 export const print = (text: string) => console.log("AI: " + text + "\n");
 
+export const printToken = (token: string) => {
+  if (token === "") return;
+  process.stdout.write(token);
+};
+
+export const printEnd = () => console.log("\n");
+
 export const close = () => rl.close();
