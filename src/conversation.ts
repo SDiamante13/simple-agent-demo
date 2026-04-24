@@ -30,7 +30,14 @@ export function addToolResult(callId: string, output: string) {
 }
 
 export function addResponse(output: unknown[]) {
-  items.push(...output);
+  const filtered = output.map((item: unknown) => {
+    if (typeof item === "object" && item !== null && (item as Record<string, unknown>).type === "function_call") {
+      const { parsed_arguments, ...rest } = item as Record<string, unknown>;
+      return rest;
+    }
+    return item;
+  });
+  items.push(...filtered);
   logDelta();
 }
 
