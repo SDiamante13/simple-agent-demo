@@ -7,7 +7,12 @@ import * as conversation from "./conversation.js";
 
 const log = createLogger("llm");
 
-const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const client = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY ?? "ollama",
+  baseURL: process.env.OPENAI_BASE_URL,
+});
+
+const model = process.env.MODEL ?? "gpt-4o-mini";
 
 let tools: Tool[] = [];
 
@@ -36,7 +41,7 @@ export function addToolResult(callId: string, output: string) {
 
 export async function complete(onToken?: (token: string) => void): Promise<Response> {
   const stream = client.responses.stream({
-    model: "gpt-4o-mini",
+    model,
     input: conversation.getItems() as OpenAI.Responses.ResponseInputItem[],
     tools,
   });
@@ -62,5 +67,15 @@ export async function complete(onToken?: (token: string) => void): Promise<Respo
     return { wantsTool: true, toolCalls, text: "" };
   }
 
-  return { wantsTool: false, toolCalls: [], text: response.output_text };
+  const text = response.output_text || extractText(response.output);
+  return { wantsTool: false, toolCalls: [], text };
+}
+
+function extractText(output: OpenAI.Responses.ResponseOutputItem[]): string {
+  return output
+    .filter((o) => o.type === "message")
+    .flatMap((o) => o.content)
+    .filter((c): c is OpenAI.Responses.ResponseOutputText => c.type === "output_text")
+    .map((c) => c.text)
+    .join("");
 }

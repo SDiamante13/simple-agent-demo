@@ -5,3 +5,4 @@ node_modules
 SPEC.md
 .DS_Store
 .nwave
+.claude
