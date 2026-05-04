@@ -127,7 +127,9 @@ push_tags() {
   local tag
   for tag in "${TAG_NAMES[@]}"; do
     note "Pushing $tag"
-    git -C "$REPO_DIR" push --force-with-lease origin "refs/tags/$tag:refs/tags/$tag"
+    # Plain --force: --force-with-lease doesn't track tag refs and
+    # falsely rejects every locally-recreated tag.
+    git -C "$REPO_DIR" push --force origin "$tag"
   done
   banner "Deleting obsolete tags from origin"
   for tag in lesson-2-tools lesson-3-observability lesson-4-external-api \
