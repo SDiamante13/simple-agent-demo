@@ -1,0 +1,8 @@
+Lesson 1: The agentic loop
+
+The simplest possible agent: a CLI that takes user input, sends it to
+an LLM, prints the response, and loops. No tools, no memory, no system
+prompt. Each turn is independent.
+
+LLM client honors OPENAI_BASE_URL + MODEL env vars so attendees can
+run against either OpenAI (paid) or local Ollama (free).

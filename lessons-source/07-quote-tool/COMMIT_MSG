@@ -1,0 +1,7 @@
+Lesson 7: Adding another tool
+
+Reinforces the tool pattern by adding a second one — an inspirational
+quote from ZenQuotes (no key needed). Same three steps: client,
+schema, dispatch.
+
+Try: "Give me an inspiring quote."

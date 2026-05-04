@@ -1,0 +1,9 @@
+Lesson 9: MCP — discover tools at runtime
+
+Tools no longer have to be hardcoded. Model Context Protocol lets
+the agent connect to external servers and fetch tool definitions on
+the fly. Local tools and remote MCP tools share one interface, so
+the agent loop doesn't care which is which.
+
+Try: "What's happening in tech today?" (uses Tavily search via MCP).
+Requires TAVILY_API_KEY in .env.

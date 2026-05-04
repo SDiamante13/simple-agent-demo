@@ -1,0 +1,8 @@
+Lesson 5: External API integration
+
+Tools can call real APIs. The Giphy client lives in its own file
+(giphyClient.ts) so integration complexity stays out of tools.ts.
+Pattern: define schema, register tool, add a thin client module.
+
+Try: "Show me a happy GIF."
+Requires GIPHY_API_KEY in .env.

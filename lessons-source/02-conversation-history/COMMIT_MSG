@@ -1,0 +1,6 @@
+Lesson 2: Conversation history
+
+The agent now remembers the conversation. Each user message and each
+model response is appended to a shared array; every turn ships the
+whole history to the model. This is multi-turn memory in the smallest
+form possible — just an array.

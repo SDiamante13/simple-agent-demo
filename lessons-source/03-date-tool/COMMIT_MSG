@@ -1,0 +1,8 @@
+Lesson 3: First tool — get_current_date_time
+
+Tools give the model capabilities the LLM doesn't have on its own.
+Pattern in three parts: (1) declare the tool as JSON schema, (2)
+implement the executor, (3) loop on tool calls inside complete().
+
+The model decides when to call the tool — we don't hardcode that.
+Try: "What time is it in Tokyo?"

@@ -1,0 +1,6 @@
+Lesson 4: Observability
+
+Agents are non-deterministic — you can't debug what you can't see.
+A small file-based logger writes every LLM call, tool call, and result
+to agent.log as JSON lines. Tail it during a session to watch the
+loop happen in real time.

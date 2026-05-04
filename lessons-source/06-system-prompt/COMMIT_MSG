@@ -1,0 +1,9 @@
+Lesson 6: The system prompt is the product
+
+Without a system prompt, an agent will help with anything the LLM
+can answer — coding, poetry, recipes. Adding prompt.md turns the
+generic LLM into a focused product (a daily briefing bot) that
+politely declines off-topic requests.
+
+The system prompt is the contract the agent honors. It's the
+thing that makes this agent *this* agent.

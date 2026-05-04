@@ -1,0 +1,7 @@
+Lesson 8: Parallel tool calls
+
+The model decides when to parallelize — we don't write that logic.
+complete() now returns an array of tool calls; the loop fires them
+with Promise.all. Independent requests overlap automatically.
+
+Try: "Give me a quote and a GIF to start my day."
