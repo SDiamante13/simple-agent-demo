@@ -7,11 +7,20 @@ const client = new OpenAI({
 
 const model = process.env.MODEL ?? "gpt-4o-mini";
 
-export async function complete(input: string): Promise<string> {
+type InputItem = OpenAI.Responses.ResponseInputItem;
+
+const conversation: InputItem[] = [];
+
+export function addUserMessage(text: string) {
+  conversation.push({ role: "user", content: text });
+}
+
+export async function complete(): Promise<string> {
   const response = await client.responses.create({
     model,
-    input,
+    input: conversation,
   });
 
+  conversation.push(...response.output);
   return response.output_text;
 }

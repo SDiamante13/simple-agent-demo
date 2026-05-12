@@ -20,7 +20,8 @@ async function main() {
     if (userInput.toLowerCase() === "exit") break;
     if (!userInput.trim()) continue;
 
-    const response = await llm.complete(userInput);
+    llm.addUserMessage(userInput);
+    const response = await llm.complete();
     print(response);
   }
 
