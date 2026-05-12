@@ -1,5 +1,6 @@
 import type { Tool } from "openai/resources/responses/responses";
 import { searchGif } from "./giphyClient.js";
+import { getInspirationalQuote } from "./quoteClient.js";
 
 export const toolDefinitions: Tool[] = [
   {
@@ -36,6 +37,17 @@ export const toolDefinitions: Tool[] = [
     },
     strict: false,
   },
+  {
+    type: "function",
+    name: "get_inspirational_quote",
+    description: "Get a random inspirational quote to motivate the user",
+    parameters: {
+      type: "object",
+      properties: {},
+      required: [],
+    },
+    strict: false,
+  },
 ];
 
 export type ToolCall = {
@@ -45,13 +57,20 @@ export type ToolCall = {
 };
 
 export async function executeTool(toolCall: ToolCall): Promise<string> {
-  switch (toolCall.name) {
-    case "get_current_date_time":
-      return executeGetCurrentTime(toolCall.arguments);
-    case "get_gif":
-      return executeGetGif(toolCall.arguments);
-    default:
-      return `Unknown tool: ${toolCall.name}`;
+  try {
+    switch (toolCall.name) {
+      case "get_current_date_time":
+        return executeGetCurrentTime(toolCall.arguments);
+      case "get_gif":
+        return await executeGetGif(toolCall.arguments);
+      case "get_inspirational_quote":
+        return await getInspirationalQuote();
+      default:
+        return `Unknown tool: ${toolCall.name}`;
+    }
+  } catch (error) {
+    const message = error instanceof Error ? error.message : String(error);
+    return `Tool '${toolCall.name}' failed: ${message}`;
   }
 }
 
