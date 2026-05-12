@@ -1,3 +1,4 @@
+import { readFileSync } from "fs";
 import OpenAI from "openai";
 import { toolDefinitions, ToolCall } from "./tools.js";
 import * as conversation from "./conversation.js";
@@ -8,6 +9,8 @@ const client = new OpenAI({
 });
 
 const model = process.env.MODEL ?? "gpt-4o-mini";
+
+conversation.addSystemPrompt(readFileSync("prompt.md", "utf-8"));
 
 export type Response = {
   wantsTool: boolean;
