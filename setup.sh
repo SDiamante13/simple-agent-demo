@@ -107,10 +107,28 @@ validate_openai() {
 
 validate_giphy() {
   local key="$1"
+  local tmp err
+  tmp="$(mktemp)"
+  err="$(mktemp)"
   local code
-  code="$(curl -s -o /dev/null -w '%{http_code}' \
-    "https://api.giphy.com/v1/gifs/search?api_key=${key}&q=test&limit=1")"
-  [ "$code" = "200" ]
+  code="$(curl -sS -o "$tmp" -w '%{http_code}' \
+    "https://api.giphy.com/v1/gifs/search?api_key=${key}&q=test&limit=1" \
+    2>"$err")"
+  if [ "$code" = "200" ]; then
+    rm -f "$tmp" "$err"
+    return 0
+  fi
+  if [ "$code" = "000" ]; then
+    local curl_err
+    curl_err="$(tr '\n' ' ' <"$err")"
+    note "curl could not reach Giphy: ${curl_err:-no error output}"
+  else
+    local msg
+    msg="$(sed -n 's/.*"msg"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' "$tmp" | head -1)"
+    note "Giphy responded HTTP ${code}${msg:+ — $msg}"
+  fi
+  rm -f "$tmp" "$err"
+  return 1
 }
 
 validate_tavily() {
@@ -126,10 +144,10 @@ validate_tavily() {
 read_secret() {
   local prompt="$1"
   local value
-  printf '    %s' "$prompt"
+  printf '    %s' "$prompt" >&2
   read -rs value
-  printf '\n'
-  printf '%s' "$value" | tr -d '[:space:]'
+  printf '\n' >&2
+  printf '%s' "$value" | LC_ALL=C tr -d '[:space:][:cntrl:]' | sed 's/\[200~//g; s/\[201~//g'
 }
 
 prompt_for_key() {
