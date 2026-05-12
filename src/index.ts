@@ -3,6 +3,7 @@ import { getUserInput, print, close } from "./cli.js";
 import { printBanner, parseCommand } from "../workshop/cli.js";
 import { dispatchCommand } from "../workshop/commands/dispatch.js";
 import * as llm from "./llm.js";
+import { executeTool } from "./tools.js";
 
 async function main() {
   printBanner();
@@ -21,8 +22,15 @@ async function main() {
     if (!userInput.trim()) continue;
 
     llm.addUserMessage(userInput);
-    const response = await llm.complete();
-    print(response);
+    let response = await llm.complete();
+
+    while (response.wantsTool) {
+      const result = executeTool(response.toolCall!);
+      llm.addToolResult(response.toolCall!.callId, result);
+      response = await llm.complete();
+    }
+
+    print(response.text);
   }
 
   close();
