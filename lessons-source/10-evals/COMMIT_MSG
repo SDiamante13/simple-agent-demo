@@ -1,0 +1,21 @@
+Lesson 10: Evals — measure what the agent actually does
+
+Promptfoo turns "the agent feels flaky" into a number. Five tests
+reveal model behavior you'd never guess by reading the code:
+
+- Single obvious tool calls are reliable.
+- Even when the user asks for a quote AND a gif, the model picks
+  one — usually the gif. The bias is consistent across runs.
+- Daily briefing fans out reliably because prompt.md enumerates
+  the tools by name. Prompt engineering teaches.
+- When get_gif returns a URL, the model often paraphrases it
+  away instead of surfacing it to the user.
+
+Run:   npm run eval
+Run:   npm run eval -- --repeat 5
+View:  npx promptfoo view
+
+Includes an llm-as-judge example (test 5) and config notes for
+swapping the grader to Qwen/Ollama/Anthropic.
+
+The bias and surfacing failures motivate lesson 11: sub-agents.

@@ -1,0 +1,8 @@
+# Routes the llm-rubric judge to Qwen via Ollama.
+# Loaded via `--grader file://promptfoo/judges/qwen.yaml` (see `npm run eval:qwen`).
+# Prereq: `ollama pull qwen2.5` and `ollama serve` on localhost:11434.
+id: openai:chat:qwen2.5:3b
+config:
+  apiBaseUrl: http://localhost:11434/v1
+  apiKey: ollama
+  temperature: 0

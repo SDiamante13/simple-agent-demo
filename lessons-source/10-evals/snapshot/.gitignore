@@ -3,9 +3,5 @@
 node_modules
 *.log
 SPEC.md
-.DS_Store
-.nwave
-.claude
-lessons.json
 promptfoo/.promptfoo/
 promptfoo/output.json

@@ -1,0 +1,89 @@
+description: "Lesson 10 — eval gradient: reliable → wobble → fail"
+
+providers:
+  - id: openai:chat:gpt-4o-mini
+    config:
+      temperature: 0.7
+      tools:
+        - type: function
+          function:
+            name: get_current_date_time
+            description: Get the current date and time
+            parameters:
+              type: object
+              properties:
+                timezone:
+                  type: string
+                  description: "Timezone like 'America/New_York' or 'UTC'. Defaults to local."
+              required: []
+        - type: function
+          function:
+            name: get_gif
+            description: Search for a GIF that fits the current conversation context. Use this to add visual reactions, illustrate emotions, or enhance responses with relevant imagery.
+            parameters:
+              type: object
+              properties:
+                query:
+                  type: string
+                  description: Search term based on conversation context (emotions, reactions, topics, actions).
+              required: [query]
+        - type: function
+          function:
+            name: get_inspirational_quote
+            description: Get a random inspirational quote to motivate the user.
+            parameters:
+              type: object
+              properties: {}
+              required: []
+      tool_choice: auto
+
+prompts:
+  - file://prompts/agent.cjs
+
+tests:
+  - description: "Test 1 — explicit single tool (time)"
+    vars:
+      query: "What time is it in Tokyo?"
+    assert:
+      - type: is-valid-openai-tools-call
+      - type: javascript
+        value: output.some(t => t.function.name === 'get_current_date_time')
+
+  - description: "Test 2 — explicit two tools (quote + gif)"
+    vars:
+      query: "I'm feeling stuck — give me a motivational quote and a gif to match."
+    assert:
+      - type: javascript
+        value: |
+          const names = output.map(t => t.function.name);
+          return names.includes('get_inspirational_quote') && names.includes('get_gif')
+
+  - description: "Test 3 — implicit two tools (motivate me)"
+    vars:
+      query: "I'm feeling stuck, motivate me"
+    assert:
+      - type: javascript
+        value: |
+          const names = output.map(t => t.function.name);
+          return names.includes('get_inspirational_quote') && names.includes('get_gif')
+
+  - description: "Test 4 — daily briefing fan-out (3 tools)"
+    vars:
+      query: "Give me my daily briefing"
+    assert:
+      - type: javascript
+        value: new Set(output.map(t => t.function.name)).size >= 3
+
+  - description: "Test 5 — off-topic request, graceful redirect (judge-graded)"
+    vars:
+      query: "I need to figure out how to write a python script to reverse a linked list. Can you help?"
+    assert:
+      - type: llm-rubric
+        value: |
+          The assistant is a Daily Briefing Bot with no coding tools. A good
+          reply must do BOTH:
+          1. Decline the coding request without attempting to answer it.
+          2. Offer a concrete briefing-bot alternative (quote, gif, time,
+             headlines) — not just "I can't help."
+          PASS only if both are present. FAIL if it tries to solve the coding problem, if it
+          refuses flatly without redirecting, or if the tone is dismissive.

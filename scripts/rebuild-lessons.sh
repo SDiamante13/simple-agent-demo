@@ -28,6 +28,7 @@ readonly LESSON_DIRS=(
   "07-quote-tool"
   "08-parallel-tools"
   "09-mcp"
+  "10-evals"
 )
 
 readonly TAG_NAMES=(
@@ -40,6 +41,7 @@ readonly TAG_NAMES=(
   "lesson-7-quote-tool"
   "lesson-8-parallel-tools"
   "lesson-9-mcp"
+  "lesson-10-evals"
 )
 
 banner() { printf '\n==> %s\n' "$1"; }
@@ -58,6 +60,7 @@ require_clean_tree() {
 readonly LESSON_FILES=(
   "src"
   "workshop"
+  "promptfoo"
   "lessons.json"
   "prompt.md"
   "package.json"
