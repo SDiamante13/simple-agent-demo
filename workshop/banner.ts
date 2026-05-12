@@ -16,7 +16,7 @@ export const renderBanner = (lessons: Lesson[], currentTag: string | null): stri
     lines.push(`  Run ./setup.sh or :goto 1 to start at lesson 1`);
   }
   lines.push(
-    `  Commands: :next  :prev  :where  :diff  :goto N  :help    (anything else → agent)`
+    `  Commands: :next  :prev  :where  :goto N  :help    (anything else → agent)`
   );
   return lines.join("\n");
 };
