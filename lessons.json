@@ -1,0 +1,11 @@
+[
+  { "tag": "lesson-1-agentic-loop", "title": "The agentic loop", "blurb": "The simplest possible agent: a CLI that takes user input, sends it to" },
+  { "tag": "lesson-2-conversation-history", "title": "Conversation history", "blurb": "The agent now remembers the conversation. Each user message and each" },
+  { "tag": "lesson-3-date-tool", "title": "First tool \u2014 get_current_date_time", "blurb": "Tools give the model capabilities the LLM doesn't have on its own." },
+  { "tag": "lesson-4-observability", "title": "Observability", "blurb": "Agents are non-deterministic \u2014 you can't debug what you can't see." },
+  { "tag": "lesson-5-external-api", "title": "External API integration", "blurb": "Tools can call real APIs. The Giphy client lives in its own file" },
+  { "tag": "lesson-6-system-prompt", "title": "The system prompt is the product", "blurb": "Without a system prompt, an agent will help with anything the LLM" },
+  { "tag": "lesson-7-quote-tool", "title": "Adding another tool", "blurb": "Reinforces the tool pattern by adding a second one \u2014 an inspirationa" },
+  { "tag": "lesson-8-parallel-tools", "title": "Parallel tool calls", "blurb": "The model decides when to parallelize \u2014 we don't write that logic." },
+  { "tag": "lesson-9-mcp", "title": "MCP \u2014 discover tools at runtime", "blurb": "Tools no longer have to be hardcoded. Model Context Protocol lets" }
+]
