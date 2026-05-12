@@ -15,6 +15,8 @@ set -euo pipefail
 readonly REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 readonly SOURCE_DIR="$REPO_DIR/lessons-source"
 readonly BUILD_BRANCH="lessons-rebuild"
+readonly WORKSHOP_STASH="$(mktemp -d)/workshop"
+readonly GENERATE_MANIFEST="$REPO_DIR/scripts/generate-lessons-json.sh"
 
 readonly LESSON_DIRS=(
   "01-agentic-loop"
@@ -55,6 +57,8 @@ require_clean_tree() {
 # preserved across snapshot applications.
 readonly LESSON_FILES=(
   "src"
+  "workshop"
+  "lessons.json"
   "prompt.md"
   "package.json"
   "package-lock.json"
@@ -75,6 +79,21 @@ apply_snapshot() {
   local snapshot_dir="$1"
   # cp -R "$snapshot_dir/." "$REPO_DIR/" preserves dotfiles and dirs.
   cp -R "$snapshot_dir/." "$REPO_DIR/"
+}
+
+stash_workshop() {
+  [ -d "$REPO_DIR/workshop" ] || fail "missing workshop/ on current branch — cannot rebuild"
+  rm -rf "$WORKSHOP_STASH"
+  mkdir -p "$(dirname "$WORKSHOP_STASH")"
+  cp -R "$REPO_DIR/workshop" "$WORKSHOP_STASH"
+}
+
+overlay_workshop() {
+  cp -R "$WORKSHOP_STASH" "$REPO_DIR/workshop"
+}
+
+overlay_manifest() {
+  ( cd "$REPO_DIR" && bash "$GENERATE_MANIFEST" >/dev/null )
 }
 
 reset_to_empty_root() {
@@ -98,6 +117,8 @@ build_one_lesson() {
 
   wipe_lesson_files
   apply_snapshot "$snapshot"
+  overlay_workshop
+  overlay_manifest
   ( cd "$REPO_DIR" && npm install --silent --no-audit --no-fund >/dev/null 2>&1 ) \
     || fail "npm install failed for $tag"
 
@@ -144,6 +165,9 @@ push_tags() {
 
 main() {
   require_clean_tree
+
+  banner "Stashing workshop/ for overlay onto each tag"
+  stash_workshop
 
   banner "Resetting to empty root on $BUILD_BRANCH"
   git -C "$REPO_DIR" branch -D "$BUILD_BRANCH" 2>/dev/null || true

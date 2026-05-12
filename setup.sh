@@ -262,7 +262,18 @@ print_next_steps() {
   note "Next lesson:      git checkout <tag>"
 }
 
+generate_lessons_manifest() {
+  banner "Step 0: Generate lessons.json from lessons-source/"
+  if [ ! -d "$REPO_DIR/lessons-source" ]; then
+    note "No lessons-source/ — skipping (lessons.json must be committed on this branch)"
+    return
+  fi
+  bash "$REPO_DIR/scripts/generate-lessons-json.sh" >/dev/null
+  note "✓ wrote lessons.json"
+}
+
 main() {
+  generate_lessons_manifest
   check_node_version
   install_dependencies
   ensure_env_file

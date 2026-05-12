@@ -37,7 +37,11 @@ git checkout lesson-1-agentic-loop
 npm start
 ```
 
-Try: `What time is it in Tokyo?` · `Give me a quote and a GIF` · `What's happening in tech today?`
+Try: `What time is it in Tokyo?` · `Give me a quote and a GIF` · `:next`
+
+### Slash commands
+
+`npm start` prints a progress banner and accepts slash commands (`:next`, `:prev`, `:goto N`, `:where`, `:diff`, `:help`). These are intercepted by the CLI harness — the agent never sees them. *Tools* are what the LLM can call; *slash commands* are what you type directly to the harness.
 
 ## Repo map
 
