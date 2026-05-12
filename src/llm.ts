@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import { toolDefinitions, ToolCall } from "./tools.js";
+import * as conversation from "./conversation.js";
 
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY ?? "ollama",
@@ -8,10 +9,6 @@ const client = new OpenAI({
 
 const model = process.env.MODEL ?? "gpt-4o-mini";
 
-type InputItem = OpenAI.Responses.ResponseInputItem;
-
-const conversation: InputItem[] = [];
-
 export type Response = {
   wantsTool: boolean;
   toolCall?: ToolCall;
@@ -19,25 +16,21 @@ export type Response = {
 };
 
 export function addUserMessage(text: string) {
-  conversation.push({ role: "user", content: text });
+  conversation.addUserMessage(text);
 }
 
 export function addToolResult(callId: string, output: string) {
-  conversation.push({
-    type: "function_call_output",
-    call_id: callId,
-    output,
-  });
+  conversation.addToolResult(callId, output);
 }
 
 export async function complete(): Promise<Response> {
   const response = await client.responses.create({
     model,
-    input: conversation,
+    input: conversation.getItems() as OpenAI.Responses.ResponseInputItem[],
     tools: toolDefinitions,
   });
 
-  conversation.push(...response.output);
+  conversation.addResponse(response.output);
 
   const toolCall = response.output.find((o) => o.type === "function_call");
 
