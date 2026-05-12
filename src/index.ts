@@ -3,9 +3,13 @@ import { getUserInput, print, close } from "./cli.js";
 import { printBanner, parseCommand } from "../workshop/cli.js";
 import { dispatchCommand } from "../workshop/commands/dispatch.js";
 import * as llm from "./llm.js";
+import * as mcp from "./mcpClient.js";
 import { executeTool } from "./tools.js";
 
 async function main() {
+  await mcp.connect();
+  await llm.init();
+
   printBanner();
   console.log("Chat CLI (type 'exit' to quit, ':help' for commands)\n");
 

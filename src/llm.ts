@@ -1,7 +1,11 @@
 import { readFileSync } from "fs";
 import OpenAI from "openai";
-import { toolDefinitions, ToolCall } from "./tools.js";
+import type { Tool } from "openai/resources/responses/responses";
+import { getAllTools, ToolCall } from "./tools.js";
+import { createLogger } from "./logger.js";
 import * as conversation from "./conversation.js";
+
+const log = createLogger("llm");
 
 const client = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY ?? "ollama",
@@ -10,7 +14,16 @@ const client = new OpenAI({
 
 const model = process.env.MODEL ?? "gpt-4o-mini";
 
-conversation.addSystemPrompt(readFileSync("prompt.md", "utf-8"));
+let tools: Tool[] = [];
+
+export async function init(): Promise<void> {
+  conversation.addSystemPrompt(readFileSync("prompt.md", "utf-8"));
+  tools = await getAllTools();
+  const toolNames = tools
+    .filter((t): t is Tool & { name: string } => "name" in t)
+    .map((t) => t.name);
+  log.info({ availableTools: toolNames });
+}
 
 export type Response = {
   wantsTool: boolean;
@@ -30,7 +43,7 @@ export async function complete(): Promise<Response> {
   const response = await client.responses.create({
     model,
     input: conversation.getItems() as OpenAI.Responses.ResponseInputItem[],
-    tools: toolDefinitions,
+    tools,
   });
 
   conversation.addResponse(response.output);
