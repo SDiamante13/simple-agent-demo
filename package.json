@@ -10,6 +10,7 @@
     "slides": "npm run slides:build && open slides/slides.html",
     "slides:build": "marp slides/slides.md -o slides/slides.html --html --theme-set slides/theme.css --allow-local-files",
     "slides:dev": "marp --server slides/ --theme-set slides/theme.css --allow-local-files",
+    "slides:publish": "node scripts/build-published-slides.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

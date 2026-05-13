@@ -148,7 +148,7 @@ Your name is Steven.
 
 <div class="label">What's missing?</div>
 
-# No concept of time / Training Cutoff Date
+# No concept of time
 
 ---
 
@@ -507,25 +507,9 @@ I help with gifs and quotes — not company info.
 
 <!-- _class: diff -->
 
-<div class="caption">.env.example</div>
-
-![](../diff-images/L8-to-L9/.env.example.png)
-
----
-
-<!-- _class: diff -->
-
 <div class="caption">package.json</div>
 
 ![](../diff-images/L8-to-L9/package.json.png)
-
----
-
-<!-- _class: diff -->
-
-<div class="caption">package-lock.json</div>
-
-![](../diff-images/L8-to-L9/package-lock.json.png)
 
 ---
 
@@ -555,46 +539,6 @@ I help with gifs and quotes — not company info.
 
 <!-- _class: diff -->
 
-<div class="caption">src/index.ts</div>
-
-![](../diff-images/L9-to-L10/src_index.ts.png)
-
----
-
-<!-- _class: diff -->
-
-<div class="caption">src/llm.ts</div>
-
-![](../diff-images/L9-to-L10/src_llm.ts.png)
-
----
-
-<!-- _class: diff -->
-
-<div class="caption">src/tools.ts</div>
-
-![](../diff-images/L9-to-L10/src_tools.ts.png)
-
----
-
-<!-- _class: diff -->
-
-<div class="caption">src/cli.ts</div>
-
-![](../diff-images/L9-to-L10/src_cli.ts.png)
-
----
-
-<!-- _class: diff -->
-
-<div class="caption">src/conversation.ts</div>
-
-![](../diff-images/L9-to-L10/src_conversation.ts.png)
-
----
-
-<!-- _class: diff -->
-
 <div class="caption">promptfoo/promptfooconfig.yaml</div>
 
 ![](../diff-images/L9-to-L10/promptfoo_promptfooconfig.yaml.png)
@@ -603,9 +547,17 @@ I help with gifs and quotes — not company info.
 
 <!-- _class: diff -->
 
-<div class="caption">promptfoo/prompts/gif-surfacing.js</div>
+<div class="caption">promptfoo/prompts/agent.cjs</div>
 
-![](../diff-images/L9-to-L10/promptfoo_prompts_gif-surfacing.js.png)
+![](../diff-images/L9-to-L10/promptfoo_prompts_agent.cjs.png)
+
+---
+
+<!-- _class: diff -->
+
+<div class="caption">promptfoo/judges/qwen.yaml</div>
+
+![](../diff-images/L9-to-L10/promptfoo_judges_qwen.yaml.png)
 
 ---
 
