@@ -21,10 +21,20 @@ paginate: true
 
 ---
 
-<!-- _class: center -->
 <!-- _paginate: false -->
 
-# Demo.
+# Lessons
+
+1. The agentic loop
+2. Conversation history
+3. First tool — get_current_date_time
+4. Observability
+5. External API integration
+6. The system prompt is the product
+7. Adding another tool
+8. Parallel tool calls
+9. MCP — discover tools at runtime
+10. Evals — measure what the agent actually does
 
 ---
 
