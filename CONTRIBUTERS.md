@@ -38,15 +38,15 @@ GitHub Pages config (one-time): **Settings → Pages → Source: Deploy from a b
 
 ### File layout
 
-| Path | Purpose |
-|---|---|
-| `slides/slides.md` | Marp source (source of truth) |
-| `slides/theme.css` | Light theme, `#76B4F0` accent |
-| `slides/slides.html` | Local build output (gitignored from publish path) |
-| `docs/index.html` | Published, self-contained deck (commit this to publish) |
-| `scripts/build-published-slides.mjs` | Inlines images and writes `docs/index.html` |
-| `diff-images/L{N-1}-to-L{N}/*.png` | Per-lesson code diff PNGs |
-| `diff-images/baseline/*.png` | Lesson 1 starting-point file screenshots |
+| Path                                 | Purpose                                                 |
+|--------------------------------------|---------------------------------------------------------|
+| `slides/slides.md`                   | Marp source (source of truth)                           |
+| `slides/theme.css`                   | Light theme, `#76B4F0` accent                           |
+| `slides/slides.html`                 | Local build output (gitignored from publish path)       |
+| `docs/index.html`                    | Published, self-contained deck (commit this to publish) |
+| `scripts/build-published-slides.mjs` | Inlines images and writes `docs/index.html`             |
+| `diff-images/L{N-1}-to-L{N}/*.png`   | Per-lesson code diff PNGs                               |
+| `diff-images/baseline/*.png`         | Lesson 1 starting-point file screenshots                |
 
 ### Regenerating diff images
 
@@ -62,5 +62,4 @@ git add diff-images/ docs/index.html && git commit && git push
 
 - Open the published URL in Chrome before the workshop
 - Verify projector legibility on the actual screen
-- Run `./setup.sh` freely during demos — the slides are served from GitHub, not your filesystem
 - Backup: the local `docs/index.html` also works offline (`open docs/index.html`)

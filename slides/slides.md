@@ -96,7 +96,7 @@ paginate: true
 
 <div class="label">What's missing?</div>
 
-# LLMs are stateless and don't remember out of the box
+# LLMs are stateless
 
 ---
 
@@ -207,7 +207,7 @@ Today is May 16, 2026.
 
 <div class="label">What's missing?</div>
 
-# The agent's a black box...for now
+# Agent is a black box
 
 ---
 
@@ -255,7 +255,7 @@ Today is May 16, 2026.
 
 <div class="label">What's missing?</div>
 
-# Realistic tools that provide useful data
+# Useful tools
 
 ---
 
@@ -518,6 +518,14 @@ I help with gifs and quotes — not company info.
 # Break it.
 
 > "Call an MCP-provided tool and trace it through the logs."
+
+---
+
+<!-- _class: diff -->
+
+<div class="caption">Architecture</div>
+
+![](assets/architecture.png)
 
 ---
 
