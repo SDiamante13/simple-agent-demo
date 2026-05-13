@@ -146,6 +146,22 @@ section.center {
   text-align: center;
 }
 
+/* Two-column lesson TOC */
+section.toc .toc-grid {
+  column-count: 2;
+  column-gap: 4rem;
+  margin-top: 1.5em;
+  font-size: 1.4em;
+}
+section.toc .toc-grid ol {
+  margin: 0;
+  padding-left: 1.5em;
+}
+section.toc .toc-grid ol li {
+  break-inside: avoid;
+  margin-bottom: 0.5em;
+}
+
 /* Replay slide (terminal-y) */
 section.replay pre {
   background: #0F172A;
