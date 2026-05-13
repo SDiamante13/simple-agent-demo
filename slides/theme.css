@@ -50,7 +50,7 @@ strong { color: var(--accent); }
 
 /* Diff image slides: image fills, small caption above */
 section.diff {
-  padding: 32px 48px;
+  padding: 24px 48px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,13 +58,23 @@ section.diff {
 }
 section.diff .caption {
   font-family: "SF Mono", Menlo, monospace;
-  font-size: 0.9em;
+  font-size: 0.85em;
   color: #64748B;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
+}
+section.diff p {
+  margin: 0;
+  max-width: 100%;
+  max-height: calc(100vh - 90px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 section.diff img {
   max-width: 100%;
-  max-height: 85vh;
+  max-height: calc(100vh - 90px);
+  width: auto;
+  height: auto;
   object-fit: contain;
 }
 
