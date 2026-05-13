@@ -7,6 +7,9 @@
     "start": "tsx src/index.ts",
     "eval": "promptfoo eval -c promptfoo/promptfooconfig.yaml --env-file .env",
     "eval:qwen": "promptfoo eval -c promptfoo/promptfooconfig.yaml --grader file://promptfoo/judges/qwen.yaml --env-file .env",
+    "slides": "npm run slides:build && open slides/slides.html",
+    "slides:build": "marp slides/slides.md -o slides/slides.html --html --theme-set slides/theme.css --allow-local-files",
+    "slides:dev": "marp --server slides/ --theme-set slides/theme.css --allow-local-files",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -19,6 +22,7 @@
     "openai": "^6.16.0"
   },
   "devDependencies": {
+    "@marp-team/marp-cli": "^4.1.2",
     "@types/node": "^25.0.10",
     "playwright": "^1.60.0",
     "promptfoo": "^0.118.0",

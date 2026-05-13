@@ -1,0 +1,156 @@
+/* @theme workshop */
+
+@import 'default';
+
+:root {
+  --accent: #76B4F0;
+  --ink: #0F172A;
+  --bg: #FFFFFF;
+}
+
+section {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  padding: 64px 80px;
+}
+
+h1 {
+  color: var(--accent);
+  font-size: 2.6em;
+  font-weight: 700;
+  margin: 0 0 0.4em 0;
+}
+
+h2 {
+  color: var(--accent);
+  font-size: 1.8em;
+  font-weight: 600;
+}
+
+h3 {
+  color: var(--ink);
+  font-size: 1.3em;
+}
+
+code, pre {
+  font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+}
+
+pre {
+  background: #F1F5F9;
+  border-left: 4px solid var(--accent);
+  padding: 1em 1.2em;
+  font-size: 0.85em;
+}
+
+a { color: var(--accent); }
+
+strong { color: var(--accent); }
+
+/* Diff image slides: image fills, small caption above */
+section.diff {
+  padding: 32px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+section.diff .caption {
+  font-family: "SF Mono", Menlo, monospace;
+  font-size: 0.9em;
+  color: #64748B;
+  margin-bottom: 12px;
+}
+section.diff img {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+}
+
+/* "What's missing?" punctuation slide */
+section.missing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: var(--bg);
+}
+section.missing h1 {
+  color: var(--accent);
+  font-size: 5em;
+  font-weight: 800;
+  margin: 0;
+  padding: 0 6%;
+  max-width: 90%;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  text-align: center;
+}
+section.missing .label {
+  position: absolute;
+  top: 48px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.9em;
+  color: #94A3B8;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* Title slide */
+section.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+section.title h1 {
+  font-size: 3.4em;
+  margin-bottom: 0.2em;
+}
+section.title .subtitle {
+  color: #64748B;
+  font-size: 1.3em;
+}
+
+/* Lesson title slide */
+section.lesson-title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+section.lesson-title .lesson-num {
+  font-family: "SF Mono", Menlo, monospace;
+  color: var(--accent);
+  font-size: 1.1em;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.5em;
+}
+section.lesson-title h1 {
+  font-size: 3em;
+  color: var(--ink);
+}
+
+/* Centered single-line slide */
+section.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Replay slide (terminal-y) */
+section.replay pre {
+  background: #0F172A;
+  color: #E2E8F0;
+  border-left: 4px solid var(--accent);
+  font-size: 1.05em;
+}
+section.replay pre code { color: #E2E8F0; }

@@ -10,4 +10,6 @@ lessons.json
 promptfoo/.promptfoo/
 promptfoo/output.json
 .playwright-mcp/
-diff-images/
+scripts/prep-diffs.sh
+scripts/prep-baseline.sh
+scripts/shoot-diffs.mjs
