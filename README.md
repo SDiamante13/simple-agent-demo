@@ -6,6 +6,10 @@ Engineers ship agents every day without knowing what's underneath. This workshop
 
 ![Agentic loop](docs/agentic-loop-explained.png)
 
+## Workshop slides
+
+View the deck at **https://sdiamante13.github.io/simple-agent-demo/** — diffs, "what's missing?" prompts, and break-it exercises for each lesson.
+
 ## Setup
 
 Run from the `main` branch (Windows: use WSL):
