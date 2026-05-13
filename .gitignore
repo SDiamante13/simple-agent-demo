@@ -9,3 +9,5 @@ SPEC.md
 lessons.json
 promptfoo/.promptfoo/
 promptfoo/output.json
+.playwright-mcp/
+diff-images/
