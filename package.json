@@ -5,6 +5,8 @@
   "main": "src/index.ts",
   "scripts": {
     "start": "tsx src/index.ts",
+    "eval": "promptfoo eval -c promptfoo/promptfooconfig.yaml --env-file .env",
+    "eval:qwen": "promptfoo eval -c promptfoo/promptfooconfig.yaml --grader file://promptfoo/judges/qwen.yaml --env-file .env",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -18,6 +20,8 @@
   },
   "devDependencies": {
     "@types/node": "^25.0.10",
+    "playwright": "^1.60.0",
+    "promptfoo": "^0.118.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }

@@ -3,3 +3,5 @@
 node_modules
 *.log
 SPEC.md
+promptfoo/.promptfoo/
+promptfoo/output.json
