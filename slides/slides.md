@@ -251,6 +251,14 @@ Today is May 16, 2026.
 
 ---
 
+<!-- _class: diff -->
+
+<div class="caption">The agentic loop</div>
+
+![](../docs/agentic-loop-explained.png)
+
+---
+
 <!-- _class: missing -->
 
 <div class="label">What's missing?</div>
@@ -311,7 +319,7 @@ Today is May 16, 2026.
 
 <div class="label">What's missing?</div>
 
-# Agents need guardrails and a clear role
+# No guardrails or role
 
 ---
 
@@ -533,7 +541,7 @@ I help with gifs and quotes — not company info.
 
 <div class="label">What's missing?</div>
 
-# Reliability and consistency
+# Reliability
 
 ---
 
@@ -574,16 +582,6 @@ I help with gifs and quotes — not company info.
 <div class="caption">promptfoo/README.md</div>
 
 ![](../diff-images/L9-to-L10/promptfoo_README.md.png)
-
----
-
-<!-- _class: center -->
-
-# Break it.
-
-> "Write an eval that catches a regression you'd actually fear in prod."
-
----
 
 <!-- _class: center -->
 
