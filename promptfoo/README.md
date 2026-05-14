@@ -22,7 +22,7 @@ npx promptfoo view              # web UI with full traces and tool_calls
 | 2 | "Quote AND gif" (explicit)                     | both tools called                    | **fails** — model picks gif, drops quote |
 | 3 | "Motivate me" (implicit)                       | both tools called                    | fails — same bias                        |
 | 4 | "Give me my daily briefing"                    | ≥3 tools called                      | reliable ✓                               |
-| 5 | "Debug this Python KeyError" (off-topic)       | `llm-rubric`: decline + redirect     | reliable ✓ (when judge is gpt-4.1)       |
+| 5 | "Help me reverse a linked list in Python" (off-topic) | `llm-rubric`: decline + redirect     | reliable ✓ (when judge is gpt-4.1)       |
 
 ## What you learn
 

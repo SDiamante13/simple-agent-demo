@@ -214,7 +214,7 @@ Today is May 16, 2026.
 
 # Break it.
 
-> "How do you know it actually called the tool — vs. made it up?"
+> "How do you know it actually called the tool?"
 
 ---
 
@@ -222,7 +222,7 @@ Today is May 16, 2026.
 
 <div class="label">What's missing?</div>
 
-# Agent is a black box
+# Traces of actions 
 
 ---
 
@@ -334,7 +334,15 @@ Today is May 16, 2026.
 
 <div class="label">What's missing?</div>
 
-# No guardrails or role
+# No guardrails and role
+
+---
+
+<!-- _class: diff -->
+
+<div class="caption">Pepper builds your bowl AND writes your code</div>
+
+![](assets/chipotle.png)
 
 ---
 
@@ -352,7 +360,7 @@ Today is May 16, 2026.
 
 ```
 > Tell me about AI Collective
-I help with gifs and quotes — not company info.
+I help with gifs and quotes — not AI communities.
 ```
 
 ---
@@ -484,7 +492,7 @@ I help with gifs and quotes — not company info.
 
 <div class="lesson-num">Lesson 9</div>
 
-# MCP — discover tools at runtime
+# MCP — still tools, different location
 
 ---
 
@@ -540,7 +548,7 @@ I help with gifs and quotes — not company info.
 
 # Break it.
 
-> "Call an MCP-provided tool and trace it through the logs."
+> "Ask for today's headlines. Compare what it says to the raw search result in the log."
 
 ---
 
@@ -564,7 +572,7 @@ I help with gifs and quotes — not company info.
 
 <div class="lesson-num">Lesson 10</div>
 
-# Evals — measure what the agent actually does
+# Evaluations
 
 ---
 
@@ -598,27 +606,27 @@ I help with gifs and quotes — not company info.
 
 ![](../diff-images/L9-to-L10/promptfoo_README.md.png)
 
-<!-- _class: center -->
+---
 
 # The loop IS the agent.
 
 ---
 
-# Scaffolding
+# Agent Anatomy
 
-**Core** — loop · history · system prompt · tools
+**Core** — loop · history · system prompt
 
-**Trust** — observability · evals
+**Trust** — observability · evals · guardrails
 
-**Reach** — external APIs · MCP
+**Connect** — APIs · MCP · sub-agents
 
 ---
 
-# Where next
+# What comes next?
 
 - Production: cost, latency, retries, streaming
 - Agents as tools
-- Eval-driven agent development
+- Eval-driven development
 - Frameworks — now you know what they abstract
 
 ---
@@ -627,5 +635,5 @@ I help with gifs and quotes — not company info.
 
 # Questions?
 
-[github.com/stevendiamante/simple-agent-demo](https://github.com/stevendiamante/simple-agent-demo)
-steven@diamantetechcoaching.com
+[github.com/SDiamante13/simple-agent-demo](https://github.com/SDiamante13/simple-agent-demo)
+Reach out at steven@diamantetechcoaching.com

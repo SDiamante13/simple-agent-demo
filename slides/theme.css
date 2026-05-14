@@ -64,15 +64,15 @@ section.diff .caption {
 }
 section.diff p {
   margin: 0;
-  max-width: 100%;
-  max-height: calc(100vh - 90px);
+  max-width: 85%;
+  max-height: calc(100vh - 180px);
   display: flex;
   align-items: center;
   justify-content: center;
 }
 section.diff img {
-  max-width: 100%;
-  max-height: calc(100vh - 90px);
+  max-width: 85%;
+  max-height: calc(100vh - 180px);
   width: auto;
   height: auto;
   object-fit: contain;
